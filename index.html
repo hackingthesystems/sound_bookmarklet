@@ -1,0 +1,74 @@
+<html lang="en" id="top">
+<link rel="shortcut icon" type="image/png" href="../soundbookmarklet/favicon.png" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    function startThing() {
+        var url = document.getElementById("mp3url").value
+        var name = document.getElementById("title").value
+        var div = document.getElementById("result")
+
+        div.style.display = "none";
+
+        var a = `var a = '<audio id="oof" onended="this.parentNode.removeChild(this)" autoplay="" style="display:none"><source src=` + url + `></audio>';
+document.body.insertAdjacentHTML('afterend', a);`
+
+        var base = btoa(a)
+
+        var finished = `eval(atob("` + base + `"))`
+
+        console.log(finished)
+
+        if (name == "") {
+            document.getElementById("bookmarkbtn").innerHTML = "Unnamed Sound";
+        } else {
+            document.getElementById("bookmarkbtn").innerHTML = name;
+        }
+
+        div.style.display = "block";
+
+        $("#bookmarkbtn").attr("href", "javascript:" + finished);
+
+        window.location = window.location.pathname + "#result"
+    }
+</script>
+
+<head>
+    <link rel='stylesheet' id='css' href='../soundbookmarklet/main.css' type='text/css' media="not all"
+        onload="this.media='all'" />
+    <title>Sound Bookmark Generator</title>
+</head>
+
+<body>
+    <div class="imgHolder">
+        <div class="intro">
+            <div class="text_holder">
+                <h1 class="intro_title">Sound Bookmarklet Generator</h1>
+                <a href="#create" class="bn13">Start Creating!</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="creationArea" id="create">
+        <span class="text-center">Creator</span>
+        <form>
+            <div class="input-container">
+                <input type="url" id="mp3url" required="" />
+                <label>MP3 Url (https://example.com/music.mp3)</label>
+            </div>
+            <div class="input-container">
+                <input type="text" id="title" required="" />
+                <label>Title</label>
+            </div>
+            <a id="Generator" href="javascript:startThing();" class="bn13">Generate!</a>
+        </form>
+    </div>
+
+    <div class="result" id="result" style="display: none;">
+        <p>1) Open your bookmarks bar (ctrl+shift+B)</p>
+        <p>2) Drag the button below to your bookmarks bar.</p>
+        <a href="#result" id="bookmarkbtn" style="margin: 0 auto" class="bn13">Loading</a>
+    </div>
+</body>
+
+</html>
