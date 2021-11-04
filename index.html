@@ -10,7 +10,7 @@
 
         div.style.display = "none";
 
-        var a = `var a = '<audio id="oof" onended="this.parentNode.removeChild(this)" autoplay="" style="display:none"><source src=` + url + `></audio>';
+        var a = `var a = '<audio id="audio" onended="this.parentNode.removeChild(this)" autoplay="" style="display:none"><source src=` + url + `></audio>';
 document.body.insertAdjacentHTML('afterend', a);`
 
         var base = btoa(a)
